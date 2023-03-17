@@ -1,26 +1,27 @@
 package wordAnalyzer;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Map.Entry;
+import java.util.PriorityQueue;
+
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+
 
 public class main {
 	
 	public static ArrayList<String> htmlScraper(String url){	// Input string of URL
 		
-		ArrayList<String> section = new ArrayList<String>();	// ArrayList to store large section of html
+		ArrayList<String> paragraphs = new ArrayList<String>();	// ArrayList to store large section of html
 		
 		try {
 			final Document soup = Jsoup.connect(url).get(); 	// Getting the html of the page
 			
 			for(Element line : soup.getElementsByTag("p")) {	// Naming var "line" and printing everything with the tag of p in our "soup"
-				String sLine = line.text();						// Converting Jsoup "Element" type, to Java "String" type with text() function.
-				section.add(sLine);								// Adding the 18 paragraphs to our ArrayList "section"
+				String paragraphText = line.text();				// Converting Jsoup "Element" type, to Java "String" type with text() function.
+				paragraphs.add(paragraphText);					// Adding the 18 paragraphs to our ArrayList "paragraphs"
 			}
 		} 
 		catch (Exception ex) {
@@ -29,8 +30,8 @@ public class main {
 		
 		ArrayList<String> arrOfStr = new ArrayList<String>();	// This ArrayList is used to store arrays of strings
 		
-		for (int i = 0; i < section.size(); i++) {
-			String para = section.get(i);						// Assigning a paragraph to the para variable
+		for (int i = 0; i < paragraphs.size(); i++) {
+			String para = paragraphs.get(i);					// Assigning a paragraph to the para variable
 			String[] word = para.split(" ");					// Creating a string array called "word", using " " delimiter to split
 			arrOfStr.addAll(Arrays.asList(word));				// Adding arrays of words to our wordList
 		}
@@ -41,9 +42,11 @@ public class main {
 		
 		ArrayList<String> wordList = new ArrayList<String>();
 		for (String word: wordArray) {
-			word.toLowerCase();								// Set to lower-case (doesn't actually seem to work)
-			word = word.replaceAll("[^A-Za-z]+", "");		// Removes all characters like commas, exclamation points, etc
-			wordList.add(word);								// Making one giant list instead of 18 individual ones with wordList
+			word = word.toLowerCase();						// Set to lower-case
+			word = word.replaceAll("[^A-Za-z'-]+", "");		// Removes all characters like commas, exclamation points, etc
+			if (!word.isEmpty()) { 							// Only add non-empty strings to the list
+				wordList.add(word);
+			}
 		}
 		return wordList;
 	}
@@ -52,31 +55,34 @@ public class main {
 
 		Map<String,Integer> wordMap = new HashMap<>();
 		
-		for (String word: wordList) {			// Looping through each word in ArrayList
-			Integer count = wordMap.containsKey(word) ? wordMap.get(word) : 0;	// This sets count var to either 0 or the key value
-	        wordMap.put(word, count + 1);		// Putting the word (skips duplicates) and count + 1 into HashMap
+		for (String word : wordList) {
+			String trimmedWord = word.trim().toLowerCase();		// Trims words of whitespace, lowercases as well (redundant)
+			if (!trimmedWord.isEmpty()) {						// Checks for empty strings
+				wordMap.merge(trimmedWord, 1, Integer::sum);	// Adds trimmedWord to map. Initializes to 1 if it doesn't exist in the map
+			}													// Otherwise grabs existing word and increments by 1 with Integer::sum
 		}
+		
 		return wordMap;
 	}
 	
-	public static Map<String, Integer> topTwentyWords(Map<String, Integer> map){
+	public static Map<String, Integer> topTwentyWords(Map<String, Integer> wordMap) {
+	    
+		// Where the top 20 words will be stored
+		Map<String, Integer> topTwenty = new HashMap<>();
+	    
+		// Reference code: (Map.Entry<String, Integer> entry : myMap.entrySet()) This is a for loop where the type is
+		// Map.Entry<...> which names the var "entry" and loops through myMap.entrySet()
 		
-		Map<String, Integer> highestFreqWords = new HashMap<String, Integer>();
-		
-		int count = 0;												// Counter to stop while loop
-		while (count != 21) {
-			int max = Collections.max(map.values()); 				// Using Collections from java.util to utilize "max" function to find max int
-			for (Entry<String, Integer> entry: map.entrySet()) {	// Creating var entry and looping through all entries in our map
-				if(entry.getValue() == max) {						// If we find something that equals "max" move to next line
-					highestFreqWords.put(entry.getKey(), max);		// Put that value in our new "top 20" map
-					map.remove(entry.getKey(), max);				// Now remove that entry from original map, so we don't pull it again
-					count++;										// Increment count for while loop
-					break;											// Start at beginning of while loop
-				}
-			}
-		}
-		System.out.println(highestFreqWords);						// Print func to visualize data
-		return highestFreqWords;
+	    PriorityQueue<Map.Entry<String, Integer>> queue = new PriorityQueue<>(	// New PriorityQueue
+	            Map.Entry.<String, Integer>comparingByValue().reversed());		// Reversing k-v pairs
+
+	    queue.addAll(wordMap.entrySet());
+	    for (int i = 0; i < 20 && !queue.isEmpty(); i++) {
+	        Map.Entry<String, Integer> entry = queue.poll();	// Poll to retrieve entry with highest value (defined above with comparingByValue().reversed()
+	        topTwenty.put(entry.getKey(), entry.getValue());	// Putting that value inside our topTwenty HashMap
+	    }
+	    System.out.println(topTwenty);	// Visualization
+	    return topTwenty;
 	}
 	
 	public static void main(String[] args) {
@@ -86,6 +92,9 @@ public class main {
 
 		// Nesting all of our created functions
 		topTwentyWords(wordCounter(wordStripper(htmlScraper(url))));
-		
 	}
+
 }
+
+
+
