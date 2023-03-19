@@ -1,11 +1,13 @@
 package wordAnalyzer;
 import javax.swing.*;
+
+import java.awt.Dimension;
 import java.awt.event.*;
 import java.util.Map;
 
 import wordAnalyzer.main;
 
-public abstract class WordAnalyzerGui implements ActionListener{
+public class WordAnalyzerGui implements ActionListener{
 
 	private main mainClass;
 	
@@ -16,26 +18,54 @@ public abstract class WordAnalyzerGui implements ActionListener{
 		
 		// Create GUI components
 		JFrame frame = new JFrame("Word Analyzer");
-		JLabel label = new JLabel();
+		JPanel panel = new JPanel();
+
+
 		
-		// Create button with ActionListener
-		JButton button = new JButton("Analyze");
-		button.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				System.out.println("Oi mate we got here");
-			}
-		});
 		
-		((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-		frame.getContentPane().add(button, "North");
-		frame.getContentPane().add(label, "Center");
-		
-		frame.pack();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(800,800);
+		frame.add(panel);
+		panel.setLayout(null);
+
+		// JButton
+		JButton button = new JButton("Analyze");
+		button.setBounds(200,20,300,40);
+		panel.add(button);
+		
+		// JLabel
+		JLabel label = new JLabel("Label Here");
+		label.setBounds(10,10,500,500);
+		panel.add(label);
+		
 		frame.setVisible(true);
 		
+
+		//frame.pack();????
+
+		
+		
+		
+		
+		// Create button with ActionListener
+		//button.addActionListener(new ActionListener(){
+		//	@Override
+		//	public void actionPerformed(ActionEvent e) {
+		//		System.out.println("Action Event Success");
+		//	}
+		//});
+		
+		//((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		//frame.getContentPane().add(button, "North");
+		//frame.getContentPane().add(label, "Center");
 	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	/*
 	 * 
