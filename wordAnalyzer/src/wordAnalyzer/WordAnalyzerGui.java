@@ -5,23 +5,41 @@ import java.util.Map;
 
 import wordAnalyzer.main;
 
-public class WAnalyzer_Gui {
+public abstract class WordAnalyzerGui implements ActionListener{
 
 	private main mainClass;
 	
-	public WAnalyzer_Gui(){
+	public WordAnalyzerGui(){
 		
 		// Instance of main class
 		mainClass = new main();
 		
 		// Create GUI components
 		JFrame frame = new JFrame("Word Analyzer");
-		JButton button = new JButton("Analyze");
 		JLabel label = new JLabel();
 		
-		// Add action listener to the button
+		// Create button with ActionListener
+		JButton button = new JButton("Analyze");
 		button.addActionListener(new ActionListener(){
+			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println("Oi mate we got here");
+			}
+		});
+		
+		((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
+		frame.getContentPane().add(button, "North");
+		frame.getContentPane().add(label, "Center");
+		
+		frame.pack();
+		frame.setSize(800,800);
+		frame.setVisible(true);
+		
+	}
+	
+	/*
+	 * 
+	 * 			public void actionPerformed(ActionEvent e) {
 				final String url = "https://www.gutenberg.org/files/1065/1065-h/1065-h.htm";
 				
 				// Run main func
@@ -38,17 +56,8 @@ public class WAnalyzer_Gui {
 				
 				label.setText(mapString);
 			}
-		});
-		
-		((JComponent) frame.getContentPane()).setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
-		frame.getContentPane().add(button, "North");
-		frame.getContentPane().add(label, "Center");
-		
-		frame.pack();
-		frame.setSize(800,800);
-		frame.setVisible(true);
-		
-	}
+	 */
+	
 	
 	//public static void main(String[] args) {
 		
@@ -71,4 +80,5 @@ public class WAnalyzer_Gui {
 
 	//}
 
+	
 }

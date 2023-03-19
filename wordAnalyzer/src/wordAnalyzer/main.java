@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-
+import wordAnalyzer.WordAnalyzerGui;
 
 public class main {
 	
@@ -86,6 +86,8 @@ public class main {
 	}
 	
 	public static void main(String[] args) {
+		
+		WordAnalyzerGui Gui = new WordAnalyzerGui();
 		
 		// Url to scrape
 		final String url = "https://www.gutenberg.org/files/1065/1065-h/1065-h.htm";
