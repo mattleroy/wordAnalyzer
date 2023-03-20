@@ -87,16 +87,15 @@ public class main {
 	
 	public static void main(String[] args) {
 		
-		WordAnalyzerGui Gui = new WordAnalyzerGui();
+		new WordAnalyzerGui();
 		
-		// Url to scrape
-		final String url = "https://www.gutenberg.org/files/1065/1065-h/1065-h.htm";
-
-		// Nesting all of our created functions
-		topTwentyWords(wordCounter(wordStripper(htmlScraper(url))));
 	}
 
 }
 
+// Url to scrape
+//final String url = "https://www.gutenberg.org/files/1065/1065-h/1065-h.htm";
 
+// Nesting all of our created functions
+//topTwentyWords(wordCounter(wordStripper(htmlScraper(url))));
 
