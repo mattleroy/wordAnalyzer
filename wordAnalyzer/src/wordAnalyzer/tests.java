@@ -41,7 +41,7 @@ public class tests {
 		testAL.add("orange");
 		
 		Map<String, Integer> testMap = mainClass.wordCounter(testAL);
-		
+
 		Map<String, Integer> expectedMap = new HashMap<>();
 		expectedMap.put("apple", 3);
 		expectedMap.put("orange", 1);
