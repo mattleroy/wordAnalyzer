@@ -11,6 +11,10 @@ public class WordAnalyzerGui implements ActionListener{
 
 	private main mainClass;
 	private String url = "https://www.gutenberg.org/files/1065/1065-h/1065-h.htm";
+	// https://www.youtube.com/watch?v=vZm0lHciFsQ
+	// Great vid on unit testing
+	
+	
 	
 	public WordAnalyzerGui(){
 		
@@ -29,7 +33,7 @@ public class WordAnalyzerGui implements ActionListener{
 		
 		// JScrollPane
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10,65,260,200);
+		scrollPane.setBounds(10,65,260,400);
 		panel.add(scrollPane);
 		
 		// JList
