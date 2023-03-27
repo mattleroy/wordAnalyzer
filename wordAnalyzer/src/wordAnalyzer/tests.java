@@ -47,6 +47,4 @@ public class tests {
 		expectedMap.put("orange", 1);
 		assertEquals(expectedMap, testMap);
 	}
-	
-	
 }
