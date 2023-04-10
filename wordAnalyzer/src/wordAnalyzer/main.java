@@ -12,6 +12,14 @@ import wordAnalyzer.WordAnalyzerGui;
 
 public class main {
 	
+	
+	/**
+	 * This method takes a URL as a string input, connects to the webpage, and scrapes all text within paragraph tags from the HTML code.
+	 * It then splits the text into individual words, and stores them in an ArrayList of strings.
+	 * @param url a string representing the URL of the webpage to be scraped
+	 * @return an ArrayList of strings containing all words found within the paragraphs of the webpage
+	 */
+	
 	public static ArrayList<String> htmlScraper(String url){	// Input string of URL
 		
 		ArrayList<String> paragraphs = new ArrayList<String>();	// ArrayList to store large section of html
@@ -38,6 +46,14 @@ public class main {
 		return arrOfStr;
 	}
 	
+	
+	/**
+	 * This method strips off non-alphabetic characters and converts all alphabetic characters to lowercase.
+	 * It takes an ArrayList of strings as input and returns an ArrayList of strings with only alphabetic characters in lowercase.
+	 * @param wordArray the input ArrayList of strings
+	 * @return an ArrayList of strings with only alphabetic characters in lowercase
+	 */
+	
 	public static ArrayList<String> wordStripper(ArrayList<String> wordArray){	// Strip off non-alpha chars
 		
 		ArrayList<String> wordList = new ArrayList<String>();
@@ -50,6 +66,14 @@ public class main {
 		}
 		return wordList;
 	}
+	
+	
+	/**
+	 * This method counts the frequency of each unique word in an input ArrayList and returns a Map with the word as the key
+	 * and its frequency as the value.
+	 * @param wordList the input ArrayList of strings with only alphabetic characters in lowercase
+	 * @return a Map with the word as the key and its frequency as the value
+	 */
 	
 	public static Map<String, Integer> wordCounter(ArrayList<String> wordList) { // Input ArrayList
 
@@ -64,6 +88,13 @@ public class main {
 		
 		return wordMap;
 	}
+	
+	/**
+	* Returns a Map of the top 20 most frequently occurring words in the input Map, sorted in descending order by frequency.
+	* The input Map must have String keys and Integer values, representing words and their respective frequencies.
+	* @param wordMap a Map with String keys and Integer values, representing words and their respective frequencies
+	* @return a Map of the top 20 most frequently occurring words in the input Map, sorted in descending order by frequency
+	*/
 	
 	public static Map<String, Integer> topTwentyWords(Map<String, Integer> wordMap) {
 	    
@@ -84,6 +115,11 @@ public class main {
 	    System.out.println(topTwenty);	// Visualization
 	    return topTwenty;
 	}
+	
+	/**
+	* Main method that starts the Word Analyzer GUI.
+	* @param args command line arguments (not used)
+	*/
 	
 	public static void main(String[] args) {
 		
