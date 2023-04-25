@@ -12,7 +12,6 @@ import wordAnalyzer.WordAnalyzerGui;
 
 public class main {
 	
-	
 	/**
 	 * This method takes a URL as a string input, connects to the webpage, and scrapes all text within paragraph tags from the HTML code.
 	 * It then splits the text into individual words, and stores them in an ArrayList of strings.
@@ -45,8 +44,7 @@ public class main {
 		}
 		return arrOfStr;
 	}
-	
-	
+
 	/**
 	 * This method strips off non-alphabetic characters and converts all alphabetic characters to lowercase.
 	 * It takes an ArrayList of strings as input and returns an ArrayList of strings with only alphabetic characters in lowercase.
@@ -66,7 +64,6 @@ public class main {
 		}
 		return wordList;
 	}
-	
 	
 	/**
 	 * This method counts the frequency of each unique word in an input ArrayList and returns a Map with the word as the key
@@ -128,10 +125,3 @@ public class main {
 	}
 
 }
-
-// Url to scrape
-//final String url = "https://www.gutenberg.org/files/1065/1065-h/1065-h.htm";
-
-// Nesting all of our created functions
-//topTwentyWords(wordCounter(wordStripper(htmlScraper(url))));
-

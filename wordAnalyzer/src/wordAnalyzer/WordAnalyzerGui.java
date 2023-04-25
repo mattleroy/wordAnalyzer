@@ -1,25 +1,13 @@
 package wordAnalyzer;
 import javax.swing.*;
-
-import java.awt.Dimension;
 import java.awt.event.*;
 import java.util.Map;
 
-import wordAnalyzer.main;
-
 public class WordAnalyzerGui implements ActionListener{
 
-	private main mainClass;
 	private String url = "https://www.gutenberg.org/files/1065/1065-h/1065-h.htm";
-	// https://www.youtube.com/watch?v=vZm0lHciFsQ
-	// Great vid on unit testing
-	
-	
 	
 	public WordAnalyzerGui(){
-		
-		// Instance of main class
-		mainClass = new main();
 		
 		// Create GUI components
 		JFrame frame = new JFrame("Word Analyzer");
@@ -50,7 +38,7 @@ public class WordAnalyzerGui implements ActionListener{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 			    // Call the necessary methods to get the result map
-			    Map<String, Integer> result = mainClass.topTwentyWords(mainClass.wordCounter(mainClass.wordStripper(mainClass.htmlScraper(url))));
+			    Map<String, Integer> result = main.topTwentyWords(main.wordCounter(main.wordStripper(main.htmlScraper(url))));
 
 			    // Create a DefaultListModel object and add the keys and values from the result map to it
 			    DefaultListModel<String> listModel = new DefaultListModel<>();
@@ -76,22 +64,3 @@ public class WordAnalyzerGui implements ActionListener{
 	}
 }
 
-//REFERENCE CODE
-/*			public void actionPerformed(ActionEvent e) {
-			final String url = "https://www.gutenberg.org/files/1065/1065-h/1065-h.htm";
-			
-			// Run main func
-			Map<String, Integer> result = mainClass.topTwentyWords(mainClass.wordCounter(mainClass.wordStripper(mainClass.htmlScraper(url))));
-			//topTwentyWords(wordCounter(wordStripper(htmlScraper(url))));
-			
-			// Create string representation of the map
-			String mapString = "Word Frequencies:\n";
-			for (Map.Entry<String, Integer> entry : result.entrySet()) {
-			    String word = entry.getKey();
-			    int frequency = entry.getValue();
-			    mapString += String.format("%s : %d%n", word, frequency);
-			}
-			
-			label.setText(mapString);
-		}
- */
